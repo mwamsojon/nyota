@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Villa Raha — Zanzibar</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;1,300;1,400&family=Barlow:wght@200;300;400;500&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --white: #ffffff;
+  --off:   #f6f5f2;
+  --light: #eeece8;
+  --border:#dddbd5;
+  --mid:   #aaa9a4;
+  --ink:   #111110;
+  --accent:#c4603a;
+  --blue:  #2e5f78;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'Barlow',sans-serif;background:var(--white);color:var(--ink);overflow-x:hidden;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 4rem;height:64px;display:flex;justify-content:space-between;align-items:center;transition:all 0.4s;border-bottom:1px solid transparent;}
+nav.scrolled{background:rgba(255,255,255,0.97);backdrop-filter:blur(16px);border-bottom-color:var(--border);}
+.nav-logo{font-family:'Cormorant',serif;font-size:1.25rem;font-style:italic;color:white;text-decoration:none;transition:color 0.4s;letter-spacing:0.05em;font-weight:300;}
+nav.scrolled .nav-logo{color:var(--ink);}
+.nav-links{display:flex;gap:0;list-style:none;}
+.nav-links a{font-size:0.63rem;letter-spacing:0.22em;text-transform:uppercase;color:rgba(255,255,255,0.75);text-decoration:none;transition:color 0.3s;padding:0 1.2rem;height:64px;display:flex;align-items:center;font-weight:300;}
+nav.scrolled .nav-links a{color:var(--mid);}
+.nav-links a:hover{color:var(--accent)!important;}
+.nav-links li:hover a{color:var(--ink)!important;}
+.nav-cta{font-size:0.62rem;letter-spacing:0.2em;text-transform:uppercase;padding:0.5rem 1.4rem;border:1px solid rgba(255,255,255,0.45);color:white;text-decoration:none;transition:all 0.3s;font-weight:300;}
+nav.scrolled .nav-cta{border-color:var(--ink);color:var(--ink);}
+.nav-cta:hover{background:var(--accent)!important;border-color:var(--accent)!important;color:white!important;}
+
+/* HERO — full bleed with large type overlay */
+#hero{height:100vh;position:relative;overflow:hidden;}
+.hero-img{position:absolute;inset:0;background:url('images/aerialJambianiBeach.jpg') center/cover no-repeat;animation:hz 20s ease-out forwards;}
+@keyframes hz{from{transform:scale(1.04);}to{transform:scale(1);}}
+.hero-grad{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,0.15) 0%,rgba(0,0,0,0.05) 50%,rgba(0,0,0,0.6) 100%);}
+.hero-content{position:absolute;bottom:0;left:0;right:0;z-index:2;padding:4rem;}
+.hero-grid{display:grid;grid-template-columns:1fr auto;align-items:flex-end;gap:4rem;}
+.hero-left{}
+.hero-location{font-size:0.6rem;letter-spacing:0.4em;text-transform:uppercase;color:rgba(255,255,255,0.6);margin-bottom:1.2rem;font-weight:200;}
+.hero-title{font-family:'Cormorant',serif;font-size:clamp(5rem,13vw,12rem);font-weight:300;line-height:0.88;color:white;letter-spacing:-0.01em;}
+.hero-title em{font-style:italic;font-weight:300;}
+.hero-right{text-align:right;padding-bottom:0.5rem;}
+.hero-sub{font-size:0.78rem;letter-spacing:0.14em;color:rgba(255,255,255,0.6);margin-bottom:2rem;font-weight:200;line-height:1.7;max-width:240px;margin-left:auto;}
+.hero-cta{display:inline-block;padding:0.85rem 2.5rem;border:1px solid rgba(255,255,255,0.6);color:white;text-decoration:none;font-size:0.62rem;letter-spacing:0.22em;text-transform:uppercase;transition:all 0.3s;font-weight:300;}
+.hero-cta:hover{background:white;color:var(--ink);}
+
+/* STATS BAR */
+.stats{border-top:1px solid var(--border);border-bottom:1px solid var(--border);display:grid;grid-template-columns:repeat(5,1fr);}
+.stat{padding:1.8rem 2rem;text-align:center;border-right:1px solid var(--border);transition:background 0.3s;}
+.stat:last-child{border-right:none;}
+.stat:hover{background:var(--off);}
+.stat-n{font-family:'Cormorant',serif;font-size:2.2rem;font-weight:300;font-style:italic;color:var(--accent);}
+.stat-l{font-size:0.58rem;letter-spacing:0.28em;text-transform:uppercase;color:var(--mid);margin-top:0.2rem;font-weight:300;}
+
+/* SECTION HELPERS */
+section{padding:8rem 4rem;}
+.eyebrow{font-size:0.58rem;letter-spacing:0.42em;text-transform:uppercase;color:var(--mid);margin-bottom:0.6rem;font-weight:400;}
+.s-title{font-family:'Cormorant',serif;font-size:clamp(2.4rem,5vw,4.2rem);font-weight:300;line-height:1.05;color:var(--ink);}
+.s-title em{font-style:italic;color:var(--blue);}
+.s-body{font-size:0.9rem;line-height:1.95;color:var(--mid);max-width:500px;margin-top:1.2rem;font-weight:300;}
+.rule{width:32px;height:1px;background:var(--border);margin:1.4rem 0;}
+
+/* ABOUT */
+#about{background:var(--white);}
+.about-wrap{max-width:1260px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:7rem;align-items:center;}
+.about-visual{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:auto auto;gap:4px;}
+.av1{grid-column:1/3;aspect-ratio:16/9;overflow:hidden;}
+.av2{aspect-ratio:3/4;overflow:hidden;}
+.av3{aspect-ratio:3/4;overflow:hidden;}
+.about-visual img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.7s;}
+.about-visual:hover img{transform:scale(1.03);}
+.badge-row{margin-top:1.5rem;display:flex;align-items:center;gap:1.5rem;}
+.badge{display:inline-flex;align-items:center;gap:0.6rem;border:1px solid var(--border);padding:0.6rem 1rem;}
+.badge span:first-child{font-family:'Cormorant',serif;font-style:italic;font-size:1.4rem;color:var(--accent);}
+.badge span:last-child{font-size:0.58rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--mid);font-weight:300;}
+
+/* FEATURES */
+#features{background:var(--off);padding-top:0;}
+.feat-rule{height:1px;background:var(--border);margin:0 4rem;}
+.feat-inner{max-width:1260px;margin:0 auto;}
+.feat-top{display:grid;grid-template-columns:1fr 1fr;gap:4rem;padding:6rem 0 4rem;}
+.feat-grid{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--border);border-left:1px solid var(--border);}
+.feat-card{padding:2.5rem 2rem;border-right:1px solid var(--border);border-bottom:1px solid var(--border);transition:background 0.3s;}
+.feat-card:hover{background:var(--white);}
+.feat-icon{font-size:1.4rem;margin-bottom:1rem;display:block;}
+.feat-card h3{font-size:0.8rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink);margin-bottom:0.6rem;font-weight:400;}
+.feat-card p{font-size:0.78rem;line-height:1.8;color:var(--mid);font-weight:300;}
+
+/* GALLERY */
+#gallery{padding:0;}
+.gal-top{padding:6rem 4rem 0;}
+.gal-strip{display:grid;grid-template-columns:3fr 2fr 2fr;height:480px;gap:0;}
+.gal-cell{overflow:hidden;position:relative;}
+.gal-cell img{width:100%;height:100%;object-fit:cover;transition:transform 0.7s,filter 0.7s;filter:grayscale(0.15);}
+.gal-cell:hover img{transform:scale(1.04);filter:grayscale(0);}
+.gal-label{position:absolute;bottom:0;left:0;right:0;padding:1.5rem;background:linear-gradient(transparent,rgba(0,0,0,0.5));color:white;font-size:0.6rem;letter-spacing:0.25em;text-transform:uppercase;font-weight:200;opacity:0;transition:opacity 0.3s;}
+.gal-cell:hover .gal-label{opacity:1;}
+.gal-sub{display:grid;grid-template-columns:repeat(3,1fr);height:280px;gap:0;}
+
+/* EXPERIENCE */
+#experience{background:var(--white);}
+.exp-wrap{max-width:1260px;margin:0 auto;}
+.exp-header{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:end;margin-bottom:5rem;padding-bottom:5rem;border-bottom:1px solid var(--border);}
+.exp-img{width:100%;aspect-ratio:16/9;object-fit:cover;}
+.exp-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:3rem;}
+.exp-card{}
+.exp-num{font-family:'Cormorant',serif;font-size:3rem;font-weight:300;font-style:italic;color:var(--light);line-height:1;margin-bottom:1rem;}
+.exp-card h4{font-size:0.76rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--ink);margin-bottom:0.6rem;font-weight:500;}
+.exp-card p{font-size:0.8rem;line-height:1.8;color:var(--mid);font-weight:300;}
+
+/* LOCATION */
+#location{background:var(--off);}
+.loc-inner{max-width:1260px;margin:0 auto;}
+.loc-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;margin-top:4rem;align-items:start;}
+.loc-img{width:100%;aspect-ratio:4/3;object-fit:cover;}
+.nearby-table{margin-top:2rem;border-top:1px solid var(--border);}
+.nearby-row{display:flex;justify-content:space-between;align-items:center;padding:0.9rem 0;border-bottom:1px solid var(--border);}
+.nearby-row span:first-child{font-size:0.78rem;color:var(--mid);font-weight:300;display:flex;align-items:center;gap:0.5rem;}
+.nearby-row span:last-child{font-size:0.78rem;color:var(--ink);font-weight:500;letter-spacing:0.05em;}
+
+/* CONTACT */
+#contact{background:var(--ink);text-align:center;}
+.contact-inner{max-width:800px;margin:0 auto;}
+#contact .eyebrow{color:var(--mid);}
+#contact .s-title{color:white;}
+#contact .s-title em{color:var(--accent);}
+#contact .s-body{color:var(--mid);text-align:center;margin:1rem auto 5rem;}
+.c-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,255,255,0.06);margin-bottom:4rem;}
+.c-cell{background:var(--ink);padding:3rem 2rem;transition:background 0.3s;}
+.c-cell:hover{background:rgba(255,255,255,0.04);}
+.c-icon{font-size:1.4rem;display:block;margin-bottom:1rem;}
+.c-lbl{font-size:0.55rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--mid);margin-bottom:0.5rem;font-weight:300;}
+.c-val{font-family:'Cormorant',serif;font-style:italic;color:white;font-size:1.1rem;font-weight:300;}
+.c-val a{color:inherit;text-decoration:none;}
+.enquire{display:inline-block;padding:1rem 4rem;border:1px solid rgba(255,255,255,0.3);color:white;text-decoration:none;font-size:0.62rem;letter-spacing:0.28em;text-transform:uppercase;transition:all 0.3s;font-weight:300;}
+.enquire:hover{border-color:white;background:white;color:var(--ink);}
+
+footer{background:var(--ink);border-top:1px solid rgba(255,255,255,0.06);padding:1.5rem 4rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;}
+.footer-logo{font-family:'Cormorant',serif;font-style:italic;color:var(--mid);font-size:1rem;font-weight:300;}
+footer p{font-size:0.58rem;color:rgba(170,169,164,0.5);letter-spacing:0.12em;}
+.footer-links{display:flex;gap:2.5rem;}
+.footer-links a{font-size:0.58rem;letter-spacing:0.2em;text-transform:uppercase;color:rgba(170,169,164,0.5);text-decoration:none;transition:color 0.3s;font-weight:300;}
+.footer-links a:hover{color:white;}
+
+.reveal{opacity:0;transform:translateY(20px);transition:opacity 0.9s,transform 0.9s;}
+.reveal.visible{opacity:1;transform:none;}
+</style>
+</head>
+<body>
+
+<nav id="main-nav">
+  <a href="#hero" class="nav-logo">Villa Raha</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#features">Amenities</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#location">Location</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Enquire</a>
+</nav>
+
+<section id="hero">
+  <div class="hero-img"></div>
+  <div class="hero-grad"></div>
+  <div class="hero-content">
+    <div class="hero-grid">
+      <div class="hero-left">
+        <p class="hero-location">Jambiani · Zanzibar · Indian Ocean</p>
+        <h1 class="hero-title">Villa<br><em>Raha</em></h1>
+      </div>
+      <div class="hero-right">
+        <p class="hero-sub">Comfort, ease, and pleasure on the edge of the Indian Ocean.</p>
+        <a href="#contact" class="hero-cta">Enquire Now</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="stats">
+  <div class="stat"><div class="stat-n">5</div><div class="stat-l">Bedrooms</div></div>
+  <div class="stat"><div class="stat-n">10</div><div class="stat-l">Guests</div></div>
+  <div class="stat"><div class="stat-n">∞</div><div class="stat-l">Ocean View</div></div>
+  <div class="stat"><div class="stat-n">15'</div><div class="stat-l">To Beach</div></div>
+  <div class="stat"><div class="stat-n">24/7</div><div class="stat-l">Concierge</div></div>
+</div>
+
+<section id="about">
+  <div class="about-wrap">
+    <div class="about-visual reveal">
+      <div class="av1"><img src="images/about_1.png" alt="Villa pool"/></div>
+      <div class="av2"><img src="images/about_2.png" alt="Interior"/></div>
+      <div class="av3"><img src="images/mwezi-boutique-resort.jpg" alt="Exterior"/></div>
+      <div class="badge-row">
+        <div class="badge"><span>5★</span><span>Luxury Villa</span></div>
+        <div class="badge"><span>∞</span><span>Ocean View</span></div>
+      </div>
+    </div>
+    <div class="reveal">
+      <p class="eyebrow">Our Story</p>
+      <h2 class="s-title">A sanctuary <em>above</em> the sea</h2>
+      <div class="rule"></div>
+      <p class="s-body">Raha — meaning <em>comfort, ease, and pleasure</em> in Swahili — is a private luxury villa perched on the edge of Zanzibar's turquoise coast. Born from a passion for authentic African elegance, every corner of Raha is designed to immerse you in the island's soul.</p>
+      <p class="s-body">From sunrise over the Indian Ocean to candlelit evenings beneath a sky full of stars, Villa Raha is an experience that transcends the ordinary.</p>
+    </div>
+  </div>
+</section>
+
+<div class="feat-rule"></div>
+<section id="features" style="padding-top:0;">
+  <div class="feat-inner">
+    <div class="feat-top reveal">
+      <div>
+        <p class="eyebrow">What's Included</p>
+        <h2 class="s-title">Every luxury, <em>considered</em></h2>
+      </div>
+      <p class="s-body">Raha is fully equipped so that nothing stands between you and pure relaxation. From the infinity pool to your personal concierge, everything is in place.</p>
+    </div>
+    <div class="feat-grid reveal">
+      <div class="feat-card"><span class="feat-icon">🏊</span><h3>Private Infinity Pool</h3><p>A stunning infinity pool hovering over the ocean — swim at dawn or sip cocktails as the sun dips below the horizon.</p></div>
+      <div class="feat-card"><span class="feat-icon">🌊</span><h3>Direct Beach Access</h3><p>Onto one of Zanzibar's most pristine white-sand beaches in just 15 minutes through your private garden.</p></div>
+      <div class="feat-card"><span class="feat-icon">🛏️</span><h3>5 King Suites</h3><p>Five en-suite bedrooms in locally-sourced textiles and hand-carved furniture, each with its own ocean view.</p></div>
+      <div class="feat-card"><span class="feat-icon">🍽️</span><h3>Fully Equipped Kitchen</h3><p>A professional kitchen stocked daily. Optional personal chef for an authentic Swahili feast upon request.</p></div>
+      <div class="feat-card"><span class="feat-icon">🌅</span><h3>Panoramic Ocean Views</h3><p>Wake up to the Indian Ocean stretching endlessly before you. Every room frames the sea like a living painting.</p></div>
+      <div class="feat-card"><span class="feat-icon">🛵</span><h3>Concierge & Transfers</h3><p>Airport pickups, excursion planning, private boat charters, spice tours — we arrange it all.</p></div>
+      <div class="feat-card"><span class="feat-icon">📶</span><h3>High-Speed WiFi</h3><p>Reliable internet throughout the villa, because even paradise sometimes needs a connection.</p></div>
+      <div class="feat-card"><span class="feat-icon">🧖</span><h3>Outdoor Terrace & Lounge</h3><p>Shaded terraces with daybeds — perfect for afternoons lulled by the sound of waves.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="gallery" style="background:var(--off);">
+  <div class="gal-top reveal">
+    <p class="eyebrow">Gallery</p>
+    <h2 class="s-title">See <em>Raha</em></h2>
+  </div>
+  <div style="margin-top:3rem;">
+    <div class="gal-strip reveal">
+      <div class="gal-cell"><img src="images/house_aerial.png" alt="Aerial"/><div class="gal-label">Aerial View</div></div>
+      <div class="gal-cell"><img src="images/about_1.png" alt="Terrace"/><div class="gal-label">Terrace</div></div>
+      <div class="gal-cell"><img src="images/about_2.png" alt="Interior"/><div class="gal-label">Interior</div></div>
+    </div>
+    <div class="gal-sub reveal">
+      <div class="gal-cell"><img src="images/mwezi-boutique-resort.jpg" alt="Exterior"/><div class="gal-label">Exterior</div></div>
+      <div class="gal-cell"><img src="images/fieflyimage.png" alt="Beach"/><div class="gal-label">Beach</div></div>
+      <div class="gal-cell"><img src="https://images.unsplash.com/photo-1506953823976-52e1fdc0149a?w=800&q=80" alt="Zanzibar"/><div class="gal-label">Zanzibar</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="exp-wrap">
+    <div class="exp-header reveal">
+      <div>
+        <p class="eyebrow">The Experience</p>
+        <h2 class="s-title">Beyond the <em>villa</em></h2>
+        <div class="rule"></div>
+        <p class="s-body">Zanzibar is an island of spice, history, and infinite blue. From Raha, the entire island is yours to explore.</p>
+      </div>
+      <img class="exp-img" src="https://images.unsplash.com/photo-1506953823976-52e1fdc0149a?w=800&q=80" alt="Zanzibar"/>
+    </div>
+    <div class="exp-grid reveal">
+      <div class="exp-card"><div class="exp-num">01</div><h4>Spice Tours</h4><p>Discover cloves, vanilla and cinnamon on guided tours through the island's legendary spice farms.</p></div>
+      <div class="exp-card"><div class="exp-num">02</div><h4>Stone Town</h4><p>Wander the UNESCO-listed Stone Town — a labyrinth of carved doors, mosques, and spice markets.</p></div>
+      <div class="exp-card"><div class="exp-num">03</div><h4>Snorkeling & Diving</h4><p>The Indian Ocean teems with reef fish, dolphins, and sea turtles. Private boat trips arranged.</p></div>
+      <div class="exp-card"><div class="exp-num">04</div><h4>Sunset Dhow Cruises</h4><p>Sail traditional Swahili wooden dhows as the sky turns amber — Zanzibar's most iconic experience.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="location" style="background:var(--white);">
+  <div class="loc-inner">
+    <div class="reveal">
+      <p class="eyebrow">Where to Find Us</p>
+      <h2 class="s-title">Jambiani, <em>Zanzibar</em></h2>
+      <div class="rule"></div>
+      <p class="s-body">Villa Raha is nestled in the serene village of Jambiani on Zanzibar's southeast coast — calm, unhurried, and breathtakingly beautiful.</p>
+    </div>
+    <div class="loc-grid">
+      <div class="reveal"><img class="loc-img" src="images/suset_zenji.jpg" alt="Coast"/></div>
+      <div class="reveal">
+        <div class="nearby-table">
+          <div class="nearby-row"><span>🏖️ Beach</span><span>15 min</span></div>
+          <div class="nearby-row"><span>🏘️ Jambiani Village</span><span>5 min</span></div>
+          <div class="nearby-row"><span>✈️ Airport</span><span>55 km</span></div>
+          <div class="nearby-row"><span>🕌 Stone Town</span><span>45 min</span></div>
+          <div class="nearby-row"><span>🐠 Snorkel Spots</span><span>10 min</span></div>
+          <div class="nearby-row"><span>🌿 Spice Farms</span><span>30 min</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="contact-inner">
+    <p class="eyebrow">Get in Touch</p>
+    <h2 class="s-title reveal">Ready to escape to <em>Raha?</em></h2>
+    <p class="s-body reveal">Reach out directly — we respond within 24 hours and are happy to craft your perfect stay.</p>
+    <div class="c-grid reveal">
+      <div class="c-cell"><span class="c-icon">✉️</span><div class="c-lbl">Email</div><div class="c-val"><a href="mailto:booking@villaraha.com">booking@villaraha.com</a></div></div>
+      <div class="c-cell"><span class="c-icon">📱</span><div class="c-lbl">WhatsApp</div><div class="c-val"><a href="tel:+4530229722">+45 30 22 97 22</a></div></div>
+      <div class="c-cell"><span class="c-icon">📍</span><div class="c-lbl">Location</div><div class="c-val">Jambiani, Zanzibar</div></div>
+    </div>
+    <a href="mailto:booking@villaraha.com" class="enquire reveal">Send an Enquiry</a>
+  </div>
+</section>
+
+<footer>
+  <span class="footer-logo">Villa Raha</span>
+  <p>© 2025 Villa Raha · Jambiani, Zanzibar</p>
+  <div class="footer-links">
+    <a href="#about">About</a><a href="#features">Amenities</a><a href="#gallery">Gallery</a><a href="#contact">Contact</a>
+  </div>
+</footer>
+
+<script>
+const nav=document.getElementById('main-nav');
+window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>60));
+const reveals=document.querySelectorAll('.reveal');
+const obs=new IntersectionObserver(e=>{e.forEach(r=>{if(r.isIntersecting){r.target.classList.add('visible');obs.unobserve(r.target);}});},{threshold:0.1});
+reveals.forEach(r=>obs.observe(r));
+</script>
+</body>
+</html>
