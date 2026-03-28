@@ -1027,15 +1027,28 @@ const backToTop = document.getElementById('backToTop');
 const floatCta = document.getElementById('floatCta');
 let lastScroll = 0;
 
+
+/* ── Updated Scroll Logic ── */
 window.addEventListener('scroll', () => {
   const y = window.scrollY;
   nav.classList.toggle('scrolled', y > 60);
+  
+  // 1. Show Back to Top after 500px
   backToTop.classList.toggle('visible', y > 500);
 
-  /* hide float CTA when contact section is visible */
+  // 2. Hide float CTA initially, show it after scrolling past the Hero button (400px), 
+  // and hide it again when reaching the Contact section.
   const contact = document.getElementById('contact');
   const contactTop = contact.getBoundingClientRect().top;
-  floatCta.classList.toggle('hidden', contactTop < window.innerHeight * 0.85);
+  
+  const isPastHero = y > 400; 
+  const isBeforeContact = contactTop > window.innerHeight * 0.85;
+
+  if (isPastHero && isBeforeContact) {
+    floatCta.classList.remove('hidden');
+  } else {
+    floatCta.classList.add('hidden');
+  }
 
   lastScroll = y;
 }, { passive: true });
