@@ -899,92 +899,6 @@ footer p { font-size: 0.6rem; color: var(--muted); letter-spacing: 0.1em; }
   .nav-drawer { padding-bottom: env(safe-area-inset-bottom); }
 }
 
-/* ═══════════════════════════════════════════
-   OPTION B — LAUNCH BADGE (hero photo corner)
-═══════════════════════════════════════════ */
-.launch-badge {
-  position: absolute;
-  top: calc(var(--nav-h) + 1.5rem);
-  right: 2rem;
-  z-index: 10;
-  width: 96px; height: 96px;
-  background: var(--accent);
-  border-radius: 50%;
-  display: flex; flex-direction: column;
-  align-items: center; justify-content: center;
-  text-align: center;
-  border: 1.5px solid rgba(255,255,255,0.22);
-  box-shadow: 0 6px 28px rgba(196,132,90,0.45);
-  pointer-events: none;
-  animation: badgePop 0.7s 0.4s var(--ease-out) both;
-}
-@keyframes badgePop {
-  from { opacity: 0; transform: scale(0.7); }
-  to   { opacity: 1; transform: scale(1); }
-}
-.launch-badge__top {
-  font-size: 7px; letter-spacing: 0.3em; text-transform: uppercase;
-  color: rgba(255,255,255,0.78); margin-bottom: 2px;
-}
-.launch-badge__main {
-  font-family: 'Playfair Display', serif;
-  font-size: 13.5px; font-style: italic;
-  color: #fff; line-height: 1.25;
-}
-.launch-badge__date {
-  font-size: 7px; letter-spacing: 0.2em; text-transform: uppercase;
-  color: rgba(255,255,255,0.72); margin-top: 3px;
-}
-
-/* ═══════════════════════════════════════════
-   OPTION C — FLOATING ANNOUNCEMENT CARD
-═══════════════════════════════════════════ */
-.announce-card {
-  position: fixed;
-  bottom: 2rem; right: 2rem;
-  z-index: 250;
-  width: 272px;
-  background: var(--ink);
-  padding: 1.4rem 1.5rem 1.4rem 1.3rem;
-  border-left: 3px solid var(--accent);
-  box-shadow: 0 10px 40px rgba(28,43,48,0.28);
-  opacity: 0; pointer-events: none;
-  transform: translateY(20px);
-  transition: opacity 0.5s var(--ease-out), transform 0.5s var(--ease-out);
-}
-.announce-card.visible {
-  opacity: 1; pointer-events: auto; transform: translateY(0);
-}
-.announce-card.hidden {
-  opacity: 0; pointer-events: none; transform: translateY(20px);
-}
-.announce-card__dismiss {
-  position: absolute; top: 0.7rem; right: 0.9rem;
-  font-size: 0.75rem; color: var(--muted);
-  cursor: pointer; background: none; border: none; padding: 4px;
-  transition: color 0.2s; line-height: 1;
-}
-.announce-card__dismiss:hover { color: var(--sand-light); }
-.announce-card__eyebrow {
-  font-size: 0.6rem; letter-spacing: 0.35em; text-transform: uppercase;
-  color: var(--accent); margin-bottom: 0.4rem;
-}
-.announce-card__title {
-  font-family: 'Playfair Display', serif;
-  font-size: 1rem; font-style: italic;
-  color: var(--linen); line-height: 1.35; margin-bottom: 0.5rem;
-}
-.announce-card__body {
-  font-size: 0.72rem; line-height: 1.75;
-  color: var(--muted); font-weight: 300;
-}
-
-@media (max-width: 767px) {
-  .launch-badge { width: 80px; height: 80px; right: 1.2rem; }
-  .launch-badge__main { font-size: 11.5px; }
-  .announce-card { bottom: 5rem; right: 1rem; left: 1rem; width: auto; }
-}
-
 </style>
 </head>
 <body>
@@ -1024,14 +938,6 @@ footer p { font-size: 0.6rem; color: var(--muted); letter-spacing: 0.1em; }
 <!-- Floating CTA (mobile) -->
 <a href="#contact" class="float-cta" id="floatCta">Enquire Now</a>
 
-<!-- ANNOUNCEMENT CARD (Option C) -->
-<div class="announce-card" id="announceCard" role="status" aria-live="polite">
-  <button class="announce-card__dismiss" id="announceDismiss" aria-label="Dismiss">✕</button>
-  <div class="announce-card__eyebrow">Coming Soon</div>
-  <div class="announce-card__title">Launching end of May 2026</div>
-  <div class="announce-card__body">This site previews the finished villa. Enquiries are welcome now — we'd love to hear from you.</div>
-</div>
-
 <!-- Back to top -->
 <a href="#hero" class="back-to-top" id="backToTop" aria-label="Back to top">↑</a>
 
@@ -1046,12 +952,6 @@ footer p { font-size: 0.6rem; color: var(--muted); letter-spacing: 0.1em; }
   </div>
   <div class="hero-right">
     <img src="images/aerialJambianiBeach.jpg" alt="Aerial view of Jambiani Beach, Zanzibar" loading="eager"/>
-    <!-- LAUNCH BADGE (Option B) -->
-    <div class="launch-badge" aria-label="Opening end of May 2026">
-      <div class="launch-badge__top">Opening</div>
-      <div class="launch-badge__main">End of<br>May</div>
-      <div class="launch-badge__date">2026</div>
-    </div>
   </div>
   <div class="hero-scroll">Discover</div>
 </section>
@@ -1211,7 +1111,7 @@ footer p { font-size: 0.6rem; color: var(--muted); letter-spacing: 0.1em; }
     <div class="footer-logo">Villa Raha</div>
     <div class="footer-tagline">Raha — comfort, ease & pleasure</div>
   </div>
-  <p>© 2026 Villa Raha · Jambiani, Zanzibar</p>
+  <p>© 2025 Villa Raha · Jambiani, Zanzibar</p>
   <div class="footer-links">
     <a href="#about">About</a>
     <a href="#features">Amenities</a>
@@ -1293,36 +1193,8 @@ const revealObs = new IntersectionObserver((entries) => {
     }
   });
 }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-allReveals.forEach(el => revealObs.observe(el));
-
-/* ── Announcement card (Option C) ── */
-const announceCard = document.getElementById('announceCard');
-const announceDismiss = document.getElementById('announceDismiss');
-let announceDismissed = false;
-
-// Show after 2 seconds
-setTimeout(() => {
-  if (!announceDismissed) announceCard.classList.add('visible');
-}, 2000);
-
-// Dismiss on ✕ click
-announceDismiss.addEventListener('click', () => {
-  announceDismissed = true;
-  announceCard.classList.remove('visible');
-  announceCard.classList.add('hidden');
-});
-
-// Auto-hide when contact section is near (reuse scroll listener)
-window.addEventListener('scroll', () => {
-  if (announceDismissed) return;
-  const contact = document.getElementById('contact');
-  const contactTop = contact.getBoundingClientRect().top;
-  if (contactTop < window.innerHeight * 0.85) {
-    announceCard.classList.remove('visible');
-  } else {
-    announceCard.classList.add('visible');
-  }
-}, { passive: true });
+allReveals.forEach(el => revealObs.observe(el));-e 
 </script>
+<div id="scrim"></div>
 </body>
 </html>
